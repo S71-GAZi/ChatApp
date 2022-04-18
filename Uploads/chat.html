@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <title>Chat App</title>
+          <link rel="stylesheet" href="./styles/style.css" />
+          <script src="./node_modules/jquery/dist/jquery.js"></script>
+          <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
+          <script src="./node_modules/socketio-file-upload/client.js"></script>
+          <script>
+               var dname = "";
+               $(() => {
+                    var socket = io.connect("http://localhost:11111");
+                    socket.on("connect", () => {
+                         console.log("connected");
+                    });
+                    var siofu = new SocketIOFileUpload(socket);
+                    siofu.listenOnInput(document.getElementById("uploadfile"));
+                    siofu.listenOnDrop(document.getElementById("drop"));
+                    socket.on("connected", (msg) => {
+                         $("#connect").show();
+                         
+                    });
+                    socket.on("updateusers", (userlist) => {
+                         $("#chatzone").show();
+                         
+                         $("#connect").hide();
+                         $("#foot").hide();
+                         console.log(userlist);
+                         $("#users").empty();
+                         userlist.forEach((u) => {
+                              $("#users").append(
+                                   `<li class="list-item">${u}</li>`
+                              );
+                         });
+                    });
+                    socket.on("message", (data) => {
+                         console.log(data);
+                         $("#msgs").append(
+                              `<li class="list-item">From ${data.f}: ${data.m}</li>`
+                         );
+                    });
+					socket.on("uploaded", (data) => {
+                         console.log(data.length);
+                         var name ='...' + data.substring(data.length-10);
+                         console.log(name);
+                         $("#files").append(`<div class='box'>
+                          <img src='/Uploads/icon.png' width='100' />
+                          <span>${name}</span>
+                          <span><a href='/Uploads/${data}' target='_blank'>Download</a></span>
+                          </div>`)
+                        
+                    });
+                    $("#join").click(() => {
+                         socket.emit("addme", $("#dname").val());
+                         dname = $("#dname").val();
+                    });
+                    $("#send").click(() => {
+                         if ($("#m").val() != "")
+                              socket.emit("send", {
+                                   f: dname,
+                                   m: $("#m").val(),
+                              });
+                         $("#m").val("");
+                    });
+                    $("#upload").click(() => {
+                         $("#uploadfile").trigger("click");
+                    });
+                    siofu.addEventListener("complete", function (event) {
+                         console.log(event.success);
+                         console.log(event.file);
+                         $("#files").append(`<div class='box'>
+                          <img src='/Uploads/icon.png' width='100' />
+                          <span>${event.file.name}</span>
+                          <span><a href='/Uploads/${event.file.name}' target='_blank'>Download</a></span>
+                          </div>`)
+                    });
+               });
+          </script>
+     </head>
+     <body>
+          <nav class="navbar">
+               <ul class="menu">
+                    <li class="menu-item always">
+                         <a href="./index.html" class="nav-link brand"
+                              >S-Bowling</a
+                         >
+                    </li>
+                    <li class="menu-item">
+                         <a href="./index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="menu-item">
+                         <a href="./chat.html" class="nav-link">Chat</a>
+                    </li>
+               </ul>
+          </nav>
+          <div class="container " style="overflow: visible;">
+              <span style="font-size:1.8rem;"><b><i>Let's Chat</i></b></span>
+               <div id="connect" style="display: none ">
+                    <input class="u-input"
+                         id="dname"
+                         type="text"
+                         placeholder="Please Enter display name"
+                    /><button class="u-input" id="join">Click  Join For Chat</button>
+               </div>
+          
+               <div id="chatzone" style="display: none" style="overflow: visible">
+                    <div class="row">
+                         <div class="col-1" id="ulist">
+                              <h3>Users</h3>
+                              <ul id="users" class="list"></ul>
+                         </div>
+                         <div class="col-3">
+                              <div class="row">
+                                   <div style="width: 100%">
+                                        <div class="input-addon">
+                                             <input
+                                                  id="m"
+                                                  clss="input-addon-field"
+                                             /><button
+                                                  id="send"
+                                                  class="input-addon-item"
+                                             >
+                                                  Send
+                                             </button>
+                                             <button
+                                                  id="upload"
+                                                  class="input-addon-item"
+                                             >
+                                                  Upload
+                                             </button>
+                                        </div>
+                                   </div>
+                              <!-- </div> -->
+
+                              <div class="row">
+                                   <div class="col-4">
+                                        <div class="drop" id="drop" style="padding:30px ; color: rgb(131, 131, 131); text-align: center;">
+                                             Want to drop afile??<br> Please drope here
+                                        </div>
+                                   </div>
+                              </div>
+                              </div>
+                             <!--  ll  -->    <div class="row col-4">
+                              <div class="row ">
+                                   <div class="col-2">
+                                        <h3>Conversations</h3>
+                                        <ul id="msgs" class="list"></ul>
+                                   </div>
+                              </div>
+                              <div class="row">
+                                   <div class="col-2">
+                                        <h3>Files shared</h3>
+                                        <div class="files" id="files">
+                                   </div>
+                              </div>
+                         </div> <!-- ll -->
+                    </div>
+                    </div>
+               </div>
+          </div>
+          <input type="file" id="uploadfile" style="display: none" />
+    
+          <footer id="foot">
+               <span style="padding: 20px;"> &copy;S-Bowling... Chat App...  Made By SORIFULLAH PAVEL(1268620)</span>
+                <div class="poll"></div>
+               
+              </div>
+          </footer>
+     </body>
+</html>

@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+* {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+     
+}
+input{
+     background-color: #51d8fd55;
+     color: rgb(255, 255, 255);
+}
+button{
+     background-color: #51d8fd00;
+     color: rgb(255, 255, 255);  
+}
+body {
+     font-family: "Roboto", sans-serif;
+     
+}
+.card {
+     width: 100%;
+     background-color: rgba(216, 216, 216, 0.356);
+     border-radius: 0.4rem;
+     margin: 25px 30px;
+     padding: 1.5rem;
+   }
+   .home{
+     width: 96%;
+     margin-top: 90px;
+     height: calc(100vh - 300px);
+     
+   }
+   .All{
+     background-image: url("../img/AjIm.gif");
+     background-size: cover;
+     height: calc(100vh - 100px);
+   }
+   .container{
+     width: 96%;
+     margin-top: 90px;
+     height: calc(100vh - 300px); 
+     overflow: scroll;
+     overflow-y: visible; 
+     margin-bottom: 300px;
+   }
+.navbar {
+     display: flex;
+     position: sticky;
+     top: 0;
+     flex-direction: row;
+     justify-content: flex-start;
+     align-items: stretch;
+     background-color: #0c0c0c;
+     border-bottom: 1px solid #4e1c1cb9 !important;
+     clip-path: polygon(83% 0, 100% 0, 93% 36%, 73% 62%, 0 100%, 53% 61%, 78% 30%)red;
+}
+.menu {
+     display: flex;
+     flex-direction: row;
+     justify-content: flex-start;
+     align-items: stretch;
+     list-style: none;
+     padding: 0;
+     margin: 0;
+}
+.menu-item {
+     padding: 0;
+     margin: 0;
+}
+.nav-link {
+     display: block;
+     width: 120px;
+     text-align: center;
+     text-decoration: none;
+     padding: 15px 16px;
+     color: wheat;
+}
+.nav-link:hover {
+     background-color: lightgray;
+     color: black;
+}
+.brand {
+     width: 260px;
+     font-weight:900;
+     
+     font-size: 2rem;
+}
+.icon {
+     width: 50px;
+     display: none;
+}
+.full-grow {
+     flex: 1 1 auto;
+}
+/*
+Layout
+*/
+.container {
+     width: 97%;
+     height: 100vh;
+     margin: 0.75rem auto;
+     background-image: url("../img/norse-attack.gif");
+     background-size: cover;
+     color: #56c1ffde;
+}
+.row {
+     width: 100%;
+     display: flex;
+     flex-direction: row;
+     align-items: stretch;
+     padding: 0.2rem;
+}
+.col-1 {
+     width: calc(100% / 4);
+}
+.col-2 {
+     width: calc((100% * 2) / 4);
+}
+.col-3 {
+     width: calc((100% * 3) / 4);
+}
+.col-4 {
+     width: 100%;
+}
+/*
+List group
+*/
+.list {
+     padding-left: 0;
+
+     margin: 0 auto;
+
+     width: 100%;
+
+     list-style: none;
+}
+.list-item {
+     padding: 0.75rem 1.25rem;
+     margin-bottom: -1px;
+     background-color: rgba(40, 224, 215, 0.013);
+     border: 3px solid rgba(20, 152, 175, 0.671);
+     width: calc(100% - 2.5rem);
+}
+.list-item.active {
+     z-index: 2;
+     color: #fff;
+     background-color: #007bff;
+     border-color: #007bff;
+}
+.list-item:first-child {
+     border-top-left-radius: 0.5rem;
+     border-top-right-radius: 0.5rem;
+     width: calc(100% - 2.5rem);
+}
+/*
+input
+*/
+.input-addon {
+     display: flex;
+     margin-bottom: 1.5em;
+     width: 100%;
+}
+.input-addon-field {
+    flex: 1;
+  }
+  .input-addon-field:not(:first-child) {
+    border-left: 0;
+  }
+  .input-addon-field:not(:last-child) {
+    border-right: 0;
+  }
+  
+  .input-addon-item {
+    background-color: rgba(147, 128, 108, 0.1);
+    color: #666666;
+    font: inherit;
+    font-weight: normal;
+  }
+  
+  .input-addon-field,
+  .input-addon-item {
+    border: 1px solid rgba(147, 128, 108, 0.25);
+    padding: 0.5em 0.75em;
+  }
+  .input-addon-item[disabled] {
+    border: 1px solid rgba(147, 128, 108, 0.25);
+    padding: 0.5em 0.75em;
+    background-color: gray;
+  }
+  .input-addon-field:first-child,
+  .input-addon-item:first-child {
+    border-radius: 2px 0 0 2px;
+  }
+  .input-addon-field:last-child,
+  .input-addon-item:last-child {
+    border-radius: 0 2px 2px 0;
+  }
+  .drop
+  {
+      width: 100%;
+      height: 150px;
+      border: solid 1px #ccc;
+      border-radius: .5rem;
+  }
+  .files {
+    width: 100%;
+   
+    border: solid 1px #ccc;
+    border-radius: .5rem;
+    padding: 15px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .box {
+      width: 100px;
+     
+      border: solid 1px #ccc;
+      border-radius: .5rem;
+      padding: 0;
+  }
+  .box span {
+    display: block;
+    text-align: center;
+  }
+
+  footer{
+       display: flex;
+       height: calc(100vh - 500px);
+       background-color: rgb(8, 8, 8);
+       color: wheat;
+      position: fixed;
+       bottom: 0;
+       right: 0;
+       left: 0;
+    
+     
+  }
+  .poll{
+       height: 100%;
+       width: 100%;
+     background-color: rgb(128, 8, 8);
+     clip-path: polygon(83% 0, 100% 0, 93% 36%, 73% 62%, 0 100%, 53% 61%, 78% 30%);
+
+  }
+  .t-poll{
+
+       height: 100%;
+     background-color: rgb(128, 8, 8);
+     clip-path: polygon(80% 0, 100% 0, 74% 64%, 27% 100%, 0 100%, 63% 51%);
+  float: right;
+}
+.u-input{
+     display: flex;
+     padding: 10px;
+     margin: 0 auto;
+     align-items: center;
+     line-height: 1rem;
+     width: 60%;
+     justify-content: center;
+}
